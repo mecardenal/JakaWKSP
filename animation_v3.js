@@ -25,8 +25,8 @@ var animate = {
   Change: function(C) {
     for (var i = 0; i < animate.density; i = i + 0.1) { // 0.5 | 1
       var a = i * Math.PI * 2 / animate.density; // 2 = full circle
-      var x = Math.cos(a) * (C.r - C.val * Math.cos(i / 90));
-      var y = Math.sin(a) * (C.r - C.val * Math.cos(i / 180));
+      var x = Math.cos(a) * (C.r - C.val * Math.cos(i / 100));
+      var y = Math.sin(a) * (C.r - C.val * Math.cos(i / 100));
       animate.ctx.fillStyle = animate.color.ink;
       animate.ctx.fillRect(animate.X(x), animate.Y(y), 1, 1);
     }
@@ -76,9 +76,9 @@ var animate = {
 		animate.canvas = document.getElementById('animation'); //document.querySelector('canvas');
     animate.ctx = animate.canvas.getContext('2d');
 
-		animate.density = 250;
-		animate.noise = 150;
-	  animate.speed = 1.84;
+		animate.density = 450;
+		animate.noise = 1250;
+	  animate.speed = 2.84;
 	  animate.color = { bg: 'rgba(242, 255, 73, 1)', ink: 'rgba(251, 98, 246, .3)' };
 
 		animate.circles = new Array(Math.floor(Math.random()*50));
@@ -89,7 +89,7 @@ var animate = {
 
 		c_left = document.getElementById('animation').offsetLeft;
 		m_left = 0;
-		w_part = Math.floor(animate.canvas.width / 10);
+		w_part = Math.floor(animate.canvas.width / 2);
 		if (c_left > w_part) {
 			m_left = c_left - w_part;
 		}
