@@ -81,7 +81,7 @@ var animate = {
 	  animate.speed = 1.84;
 	  animate.color = { bg: 'rgba(242, 255, 73, 1)', ink: 'rgba(251, 98, 246, .3)' };
 
-		animate.circles = new Array(Math.floor(Math.random()*50));
+		animate.circles = new Array(Math.floor(Math.random()*51));
 		//animate.circles = new Array(1);
 		animate.canvas.width = window.innerWidth > 500 ? 400 : window.innerWidth;
 		animate.canvas.height = animate.canvas.width;
