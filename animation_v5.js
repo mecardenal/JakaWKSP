@@ -14,11 +14,7 @@ var animate = {
     this.max = Math.random() * animate.noise;
     this.min = -Math.random() * animate.noise;
     this.val = Math.random() * (this.max - this.min) + this.min;
-
-    //Random color:
-    //this.color = "#" + Math.floor(Math.random()*16777215).toString(16) + "19";
-    this.color = animate.color.ink[Math.floor(Math.random()*animate.color.ink.length)] + "40";
-
+    this.color = "#" + Math.floor(Math.random()*16777215).toString(16) + "49";
   },
 
   Clear: function() {
@@ -30,10 +26,10 @@ var animate = {
   Change: function(C) {
     for (var i = 0; i < animate.density; i = i + 0.5) { // 0.5 | 1
       var a = i * Math.PI * 2 / animate.density; // 2 = full circle
-      var x = Math.sin(a) * (C.r - C.val * Math.tan(i / 4));
-      var y = Math.tan(a) * (C.r - C.val * Math.tan(i / 2));
+      var x = Math.cos(a) * (C.r - C.val * Math.tan(i / 4));
+      var y = Math.tan(a) * (C.r - C.val * Math.sin(i / 2));
       animate.ctx.fillStyle = C.color;
-      animate.ctx.fillRect(animate.X(x), animate.Y(y), 2, 2);
+      animate.ctx.fillRect(animate.X(x), animate.Y(y), 1, 1);
     }
     animate.Check(C);
   },
@@ -81,10 +77,10 @@ var animate = {
 		animate.canvas = document.getElementById('animation'); //document.querySelector('canvas');
     animate.ctx = animate.canvas.getContext('2d');
 
-    animate.density = 3850;
-    animate.noise = 134.9;
-    animate.speed = 2.5;
-	  animate.color = { bg: 'black', ink: Array("#577590","#F3CA40","#F2A541","#F08A4B","#D78A76") };
+    animate.density = 2850;
+    animate.noise = 34.9;
+    animate.speed = 0.2;
+	  animate.color = { bg: 'white', ink: 'green' };
 
 		//animate.circles = new Array(Math.floor(Math.random()*6) + 2);
 		animate.circles = new Array(20);

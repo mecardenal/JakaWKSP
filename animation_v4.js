@@ -14,11 +14,6 @@ var animate = {
     this.max = Math.random() * animate.noise;
     this.min = -Math.random() * animate.noise;
     this.val = Math.random() * (this.max - this.min) + this.min;
-
-    //Random color:
-    //this.color = "#" + Math.floor(Math.random()*16777215).toString(16) + "19";
-    this.color = animate.color.ink[Math.floor(Math.random()*animate.color.ink.length)] + "40";
-
   },
 
   Clear: function() {
@@ -30,10 +25,20 @@ var animate = {
   Change: function(C) {
     for (var i = 0; i < animate.density; i = i + 0.5) { // 0.5 | 1
       var a = i * Math.PI * 2 / animate.density; // 2 = full circle
-      var x = Math.sin(a) * (C.r - C.val * Math.tan(i / 4));
-      var y = Math.tan(a) * (C.r - C.val * Math.tan(i / 2));
-      animate.ctx.fillStyle = C.color;
-      animate.ctx.fillRect(animate.X(x), animate.Y(y), 2, 2);
+      var x = Math.cos(a) * (C.r - C.val * Math.tan(i / 4));
+      var y = Math.tan(a) * (C.r - C.val * Math.sin(i / 2));
+      if(i % 6 == 0){
+        animate.ctx.fillStyle = animate.color.ink;
+      }else if(i%3 == 0){
+        animate.ctx.fillStyle = 'rgba(97, 226, 148, .7)';
+      }else if(i%2 == 0){
+        animate.ctx.fillStyle = 'rgba(252, 255, 108, .7)';
+      }else{
+        animate.ctx.fillStyle = 'rgba(180, 122, 234, .7)';
+      }
+
+
+      animate.ctx.fillRect(animate.X(x), animate.Y(y), 1, 1);
     }
     animate.Check(C);
   },
@@ -81,13 +86,13 @@ var animate = {
 		animate.canvas = document.getElementById('animation'); //document.querySelector('canvas');
     animate.ctx = animate.canvas.getContext('2d');
 
-    animate.density = 3850;
-    animate.noise = 134.9;
-    animate.speed = 2.5;
-	  animate.color = { bg: 'black', ink: Array("#577590","#F3CA40","#F2A541","#F08A4B","#D78A76") };
+		animate.density = 2850;
+		animate.noise = 34.9;
+	  animate.speed = 0.2;
+	  animate.color = { bg: 'white', ink: 'rgba(251, 98, 246, .7)' };
 
 		//animate.circles = new Array(Math.floor(Math.random()*6) + 2);
-		animate.circles = new Array(20);
+		animate.circles = new Array(5);
 		animate.canvas.width = window.innerWidth > 500 ? 500 : window.innerWidth;
 		animate.canvas.height = animate.canvas.width;
   	animate.radius = Math.floor(animate.canvas.width / 2 - animate.noise - 2);
