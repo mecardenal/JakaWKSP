@@ -73,7 +73,7 @@ var animate = {
 		//console.log("window.innerWidth: " + window.innerWidth + " | window.innerHeight: " + window.innerHeight);
 		//window.innerWidth > window.innerHeight ? window.innerWidth : window.innerHeight;
 
-		animate.canvas = document.getElementById('animation'); //document.querySelector('canvas');
+		animate.canvas = document.getElementById('animation1'); //document.querySelector('canvas');
     animate.ctx = animate.canvas.getContext('2d');
 
 		animate.density = 2050;
@@ -87,7 +87,7 @@ var animate = {
 		animate.canvas.height = animate.canvas.width;
   	animate.radius = Math.floor(animate.canvas.width / 2 - animate.noise - 2);
 
-		c_left = document.getElementsByClassName('container')[0].offsetLeft;
+		c_left = document.getElementsByClassName('animation1')[0].offsetLeft;
 		m_left = 0;
 		w_part = Math.floor(animate.canvas.width / 2);
 		if (c_left > w_part) {
@@ -95,13 +95,12 @@ var animate = {
 		}
 
 		//document.getElementById('test').innerText = "margin-left: " + m_left + " | part: " + w_part + " | left: " + document.getElementsByClassName('container')[0].offsetLeft;
-		document.getElementById('animation').style.marginLeft = m_left + "px";
+		document.getElementById('animation1').style.marginLeft = m_left + "px";
 
     animate.Set();
     animate.Draw();
   }
 };
-
 
 
 window.addEventListener('load', function(){animate.Init();});

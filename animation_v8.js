@@ -62,18 +62,18 @@ var animate = {
     animate.Update();
     var now = new Date();
     var timedif =Math.round((now - time0)/1000);
-    //It executes every 6 seconds
-    console.log( timedif);
 
-    if(timedif>2){
-    //  sec = now.getSeconds();
+
+
+    //It executes every 6 seconds
+    if((timedif%3 == 0)&&(now.getSeconds()!=sec)){
+      sec = now.getSeconds();
+      console.log(sec + " / " + now.getSeconds() + " / " + timedif%3);
       animate.color = { bg: 'black', ink: colors_array[Math.floor(Math.random()*colors_array.length)] };
 
       window.requestAnimationFrame(animate.Set);
-      time0 = new Date();
+
     }
-
-
 
     window.requestAnimationFrame(animate.Draw);
   },
