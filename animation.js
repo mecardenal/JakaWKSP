@@ -62,9 +62,7 @@ var animate = {
     animate.Update();
     var now = new Date();
     var timedif =Math.round((now - time0)/1000);
-    //It executes every 6 seconds
-    console.log( timedif);
-
+  
     if(timedif>2){
     //  sec = now.getSeconds();
       animate.color = { bg: 'black', ink: colors_array[Math.floor(Math.random()*colors_array.length)] };
@@ -130,7 +128,6 @@ colors_array[0] =  ["#577590","#F3CA40","#F2A541","#F08A4B","#D78A76"] ;
 colors_array[1] =  ["#BDEDE0","#BBDBD1","#B6B8D6","#7E78D2","#6F58C9"] ;
 colors_array[2] =  ["#084c61","#db504a","#e3b505","#4f6d7a","#56a3a6"];
 
- Array("#577590","#F3CA40","#F2A541","#F08A4B","#D78A76")
 //getElementById("button1").addEventListener('click',function(){};);
 window.addEventListener('load', function(){animate.Init();});
 window.addEventListener('resize',function(){animate.Init();},false);

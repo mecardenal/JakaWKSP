@@ -12,24 +12,54 @@
 <meta name="keywords" content="spletna umetnost, elektronska literatura">
 
 <style>
-#animation1m{
+/*
+#aanimation{
   width: 100vw;
   height: 100vh;
   border: 1px solid green;
 }
+*/
+body{
+margin: 0;
+padding: 0;
+}
+/*
+#buttons div{
+  border:1px solid;
+  width:100px; margin:10px;
+  cursor:pointer;
+  text-align:center;
+}
+*/
+
+
+#animationA {
+  width: 500px;
+  height: 500px;
+  position: absolute;
+  top: 0;
+  left:0;
+}
+
+#animationB {
+  width: 500px;
+  height: 500px;
+  position: absolute;
+  top: 0;
+  left:0;
+  opacity:30%;
+}
+
 
 </style>
 
-<script src="animation.js" defer></script>
-<script src="animation_v1.js" defer></script>
-<script src="animation_v2.js" defer></script>
-<script src="animation_v3.js" defer></script>
-
+<script src="animationA.js" defer></script>
+<script src="animationB.js" defer></script>
 </head>
 <body>
-<canvas id="animation"></canvas>
-<canvas id="animation1"></canvas>
-<canvas id="animation2"></canvas>
-<canvas id="animation3"></canvas>
+
+<canvas id="animationA"></canvas>
+<canvas id="animationB"></canvas>
+
 </body>
 </html>
