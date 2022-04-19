@@ -1,71 +1,71 @@
-var animate = {
+var animateB = {
   // X & Y positions
   X: function(x) {
-    return animate.canvas.width / 2 + x;
+    return animateB.canvas.width / 2 + x;
   },
 
   Y: function(y) {
-    return animate.canvas.height / 2 - y;
+    return animateB.canvas.height / 2 - y;
   },
 
   Circle: function(i) {
-    this.r = animate.radius - i * animate.radius / animate.circles.length;
+    this.r = animateB.radius - i * animateB.radius / animateB.circles.length;
     this.e = i % 5 ? true : false;
-    this.max = Math.random() * animate.noise;
-    this.min = -Math.random() * animate.noise;
+    this.max = Math.random() * animateB.noise;
+    this.min = -Math.random() * animateB.noise;
     this.val = Math.random() * (this.max - this.min) + this.min;
   },
 
   Clear: function() {
-    animate.ctx.fillStyle = animate.color.bg;
-  //  animate.ctx.fillRect(0, 0, animate.canvas.width, animate.canvas.height);
-    animate.ctx.clearRect(0, 0, animate.canvas.width, animate.canvas.height);
+    animateB.ctx.fillStyle = animateB.color.bg;
+  //  animateB.ctx.fillRect(0, 0, animateB.canvas.width, animateB.canvas.height);
+    animateB.ctx.clearRect(0, 0, animateB.canvas.width, animateB.canvas.height);
   },
 
   // changing of shape
   Change: function(C) {
-    for (var i = 0; i < animate.density; i = i + 0.1) { // 0.5 | 1
-      var a = i * Math.PI * 2 / animate.density; // 2 = full circle
+    for (var i = 0; i < animateB.density; i = i + 0.1) { // 0.5 | 1
+      var a = i * Math.PI * 2 / animateB.density; // 2 = full circle
       var x = Math.cos(a) * (C.r - C.val * Math.cos(i / 100));
       var y = Math.sin(a) * (C.r - C.val * Math.cos(i / 100));
-      animate.ctx.fillStyle = animate.color.ink;
-      animate.ctx.fillRect(animate.X(x), animate.Y(y), 1, 1);
+      animateB.ctx.fillStyle = animateB.color.ink;
+      animateB.ctx.fillRect(animateB.X(x), animateB.Y(y), 1, 1);
     }
-    animate.Check(C);
+    animateB.Check(C);
   },
 
   //noise level checks | in-out
   Check: function(c) {
-    c.val = c.e ? c.val + animate.speed : c.val - animate.speed;
+    c.val = c.e ? c.val + animateB.speed : c.val - animateB.speed;
     if (c.val < c.min) {
       c.e = true;
-      c.max = Math.random() * animate.noise;
+      c.max = Math.random() * animateB.noise;
     }
     if (c.val > c.max) {
       c.e = false;
-      c.min = -Math.random() * animate.noise;
+      c.min = -Math.random() * animateB.noise;
     }
   },
 
   Update: function() {
-    animate.Clear();
-    for (var i = 0; i < animate.circles.length; i++) {
-      animate.Change(animate.circles[i]);
+    animateB.Clear();
+    for (var i = 0; i < animateB.circles.length; i++) {
+      animateB.Change(animateB.circles[i]);
     }
   },
 
   Draw: function() {
-    animate.Update();
-    window.requestAnimationFrame(animate.Draw);
+    animateB.Update();
+    window.requestAnimationFrame(animateB.Draw);
   },
 
   //set circles
   Set: function() {
-    for (var i = 0; i < animate.circles.length; i++) {
-      animate.circles[i] = new animate.Circle(i);
-			//console.log(animate.circles[i]);
+    for (var i = 0; i < animateB.circles.length; i++) {
+      animateB.circles[i] = new animateB.Circle(i);
+			//console.log(animateB.circles[i]);
     }
-		//console.log(animate.circles);
+		//console.log(animateB.circles);
   },
 
   Init: function() {
@@ -74,23 +74,23 @@ var animate = {
 		//console.log("window.innerWidth: " + window.innerWidth + " | window.innerHeight: " + window.innerHeight);
 		//window.innerWidth > window.innerHeight ? window.innerWidth : window.innerHeight;
 
-		animate.canvas = document.getElementById('animationB'); //document.querySelector('canvas');
-    animate.ctx = animate.canvas.getContext('2d');
+		animateB.canvas = document.getElementById('animationB'); //document.querySelector('canvas');
+    animateB.ctx = animateB.canvas.getContext('2d');
 
-		animate.density = 450;
-		animate.noise = 1250;
-	  animate.speed = 2.84;
-	  animate.color = { bg: '#FFFFFF01', ink: 'rgba(251, 98, 246, .3)' };
+		animateB.density = 450;
+		animateB.noise = 1250;
+	  animateB.speed = 2.84;
+	  animateB.color = { bg: 'pink', ink: 'red' };
 
-		animate.circles = new Array(Math.floor(Math.random()*50));
-		//animate.circles = new Array(1);
-		animate.canvas.width = window.innerWidth > 500 ? 400 : window.innerWidth;
-		animate.canvas.height = animate.canvas.width;
-  	animate.radius = Math.floor(animate.canvas.width / 10 - animate.noise - 2);
+		animateB.circles = new Array(Math.floor(Math.random()*50));
+		//animateB.circles = new Array(1);
+		animateB.canvas.width = window.innerWidth > 500 ? 400 : window.innerWidth;
+		animateB.canvas.height = animateB.canvas.width;
+  	animateB.radius = Math.floor(animateB.canvas.width / 10 - animateB.noise - 2);
 
 		c_left = document.getElementById('animationB').offsetLeft;
 		m_left = 0;
-		w_part = Math.floor(animate.canvas.width / 2);
+		w_part = Math.floor(animateB.canvas.width / 2);
 		if (c_left > w_part) {
 			m_left = c_left - w_part;
 		}
@@ -98,12 +98,12 @@ var animate = {
 		//document.getElementById('test').innerText = "margin-left: " + m_left + " | part: " + w_part + " | left: " + document.getElementsByClassName('container')[0].offsetLeft;
 		document.getElementById('animationB').style.marginLeft = m_left + "px";
 
-    animate.Set();
-    animate.Draw();
+    animateB.Set();
+    animateB.Draw();
   }
 };
 
 
 
-window.addEventListener('load', function(){animate.Init();});
-window.addEventListener('resize',function(){animate.Init();},false);
+window.addEventListener('load', function(){animateB.Init();});
+window.addEventListener('resize',function(){animateB.Init();},false);

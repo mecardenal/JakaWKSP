@@ -1,7 +1,7 @@
 var animate = {
   // X & Y positions
   X: function(x) {
-    return animate.canvas.width / 2   x;
+    return animate.canvas.width / 2 + x;
   },
 
   Y: function(y) {
@@ -13,7 +13,7 @@ var animate = {
     this.e = i % 2 ? true : false;
     this.max = Math.random() * animate.noise;
     this.min = -Math.random() * animate.noise;
-    this.val = Math.random() * (this.max - this.min)   this.min;
+    this.val = Math.random() * (this.max - this.min) + this.min;
   },
 
   Clear: function() {
@@ -23,7 +23,7 @@ var animate = {
 
   // changing of shape
   Change: function(C) {
-    for (var i = 0; i < animate.density; i = i   0.5) { // 0.5 | 1
+    for (var i = 0; i < animate.density; i = i + 0.5) { // 0.5 | 1
       var a = i * Math.PI * 2 / animate.density; // 2 = full circle
       var x = Math.cos(a) * (C.r - C.val * Math.sin(i / 4));
       var y = Math.sin(a) * (C.r - C.val * Math.sin(i / 4));
@@ -44,16 +44,16 @@ var animate = {
         //console.log("CHANGE! "   colorrand);
 
 
-        animate.colorsindex  ; if (animate.colorsindex > 3) animate.colorsindex = 0;
+        animate.colorsindex++; if (animate.colorsindex > 3) animate.colorsindex = 0;
         animate.color.ink = animate.colors[animate.colorsindex];
          //= ['#FF0000', '#00FF00', '#0000FF', '#000000'];
-         console.log("index: "   animate.colorsindex   " || color: "   animate.colors[animate.colorsindex]);
+         //console.log("index: " + animate.colorsindex + " || color: " + animate.colors[animate.colorsindex]);
 
   },
 
   //noise level checks | in-out
   Check: function(c) {
-    c.val = c.e ? c.val   animate.speed : c.val - animate.speed;
+    c.val = c.e ? c.val + animate.speed : c.val - animate.speed;
     if (c.val < c.min) {
       c.e = true;
       c.max = Math.random() * animate.noise;
@@ -66,7 +66,7 @@ var animate = {
 
   Update: function() {
     animate.Clear();
-    for (var i = 0; i < animate.circles.length; i  ) {
+    for (var i = 0; i < animate.circles.length; i++) {
       animate.Change(animate.circles[i]);
     }
   },
@@ -78,9 +78,8 @@ var animate = {
 
   //set circles
   Set: function() {
-    for (var i = 0; i < animate.circles.length; i  ) {
+    for (var i = 0; i < animate.circles.length; i++) {
       animate.circles[i] = new animate.Circle(i);
-			//console.log(animate.circles[i]);
     }
 		//console.log(animate.circles);
   },
@@ -108,21 +107,19 @@ var animate = {
     animate.colors = ['#FF0000', '#00FF00', '#0000FF', '#000000'];
     animate.colorsindex = 0;
 
-		c_left = document.getElementsByClassName('animation')[0].offsetLeft;
-		m_left = 0;
-		w_part = Math.floor(animate.canvas.width / 4);
-		if (c_left > w_part) {
-			m_left = c_left - w_part;
-		}
+    c_left = document.getElementById('animation').offsetLeft;
+    m_left = 0;
+    w_part = Math.floor(animate.canvas.width / 10);
+    if (c_left > w_part) {
+      m_left = c_left - w_part;
+    }
 
-		//document.getElementById('test').innerText = "margin-left: "   m_left   " | part: "   w_part   " | left: "   document.getElementsByClassName('container')[0].offsetLeft;
-		document.getElementById('animation').style.marginLeft = m_left   "px";
+		document.getElementById('animation').style.marginLeft = m_left + "px";
 
     animate.Set();
     animate.Draw();
   }
 };
 
-
-window.addEventListener('load', function(){animate.Init();});
-window.addEventListener('resize',function(){animate.Init();},false);
+  window.addEventListener('load', function(){animate.Init();});
+  window.addEventListener('resize',function(){animate.Init();},false);

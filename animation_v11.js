@@ -25,8 +25,8 @@ var animate = {
   Change: function(C) {
     for (var i = 0; i < animate.density; i = i + 0.5) { // 0.5 | 1
       var a = i * Math.PI * 2 / animate.density; // 2 = full circle
-      var x = Math.cos(a) * (C.r - C.val * Math.sin(i / 2));
-      var y = Math.cos(a) * (C.r - C.val * Math.sin(i / 4));
+      var x = Math.sin(a) * (C.r - C.val * Math.tan(i / 4));
+      var y = Math.tan(a) * (C.r - C.val * Math.cos(i / 4));
       animate.ctx.fillStyle = animate.color.ink;
       animate.ctx.fillRect(animate.X(x), animate.Y(y), 1, 1);
     }
@@ -38,7 +38,7 @@ var animate = {
   ChangeColor: function() {
         // random change of color
         animate.colorsindex++; if (animate.colorsindex > 3) animate.colorsindex = 0;
-        animate.color.ink = animate.colors[animate.colorsindex] + "40";
+        animate.color.ink = animate.colors[animate.colorsindex] + "80";
          
   },
 
@@ -81,9 +81,9 @@ var animate = {
     animate.ctx = animate.canvas.getContext('2d');
 
 
-    animate.density = 4550;
-    animate.noise = 164;
-    animate.speed = 5;
+    animate.density = 10550;
+    animate.noise = 1140;
+    animate.speed = 6.5;
     animate.color = { bg: 'black', ink: 'rgba(0, 0, 0, .5)' };
 
     animate.circles = new Array(8); //new Array(Math.floor(Math.random()*6)   2); // 16, 12
