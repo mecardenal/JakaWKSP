@@ -14,6 +14,7 @@ var animate = {
     this.max = Math.random() * animate.noise;
     this.min = -Math.random() * animate.noise;
     this.val = Math.random() * (this.max - this.min) + this.min;
+    this.color = "#" + Math.floor(Math.random()*16777215).toString(16) + "49";
   },
 
   Clear: function() {
@@ -25,21 +26,12 @@ var animate = {
   Change: function(C) {
     for (var i = 0; i < animate.density; i = i + 0.5) { // 0.5 | 1
       var a = i * Math.PI * 2 / animate.density; // 2 = full circle
-      var x = Math.cos(a) * (C.r - C.val * Math.sin(i / 2));
-      var y = Math.cos(a) * (C.r - C.val * Math.sin(i / 4));
-      animate.ctx.fillStyle = animate.color.ink;
+      var x = Math.cos(a) * (C.r - C.val * Math.tan(i / 4));
+      var y = Math.tan(a) * (C.r - C.val * Math.sin(i / 2));
+      animate.ctx.fillStyle = C.color;
       animate.ctx.fillRect(animate.X(x), animate.Y(y), 1, 1);
     }
-    animate.ChangeColor();
     animate.Check(C);
-  },
-
-  // change color of a complete "circle"
-  ChangeColor: function() {
-        // random change of color
-        animate.colorsindex++; if (animate.colorsindex > 3) animate.colorsindex = 0;
-        animate.color.ink = animate.colors[animate.colorsindex] + "40";
-         
   },
 
   //noise level checks | in-out
@@ -71,42 +63,48 @@ var animate = {
   Set: function() {
     for (var i = 0; i < animate.circles.length; i++) {
       animate.circles[i] = new animate.Circle(i);
+			//console.log(animate.circles[i]);
     }
-    //console.log(animate.circles);
+		//console.log(animate.circles);
   },
 
   Init: function() {
- 
-    animate.canvas = document.getElementById('animation'); //document.querySelector('canvas');
+		//console.info("INIT");
+		//console.log();
+		//console.log("window.innerWidth: " + window.innerWidth + " | window.innerHeight: " + window.innerHeight);
+		//window.innerWidth > window.innerHeight ? window.innerWidth : window.innerHeight;
+
+		animate.canvas = document.getElementById('animation'); //document.querySelector('canvas');
     animate.ctx = animate.canvas.getContext('2d');
 
+    animate.density = 2850;
+    animate.noise = 34.9;
+    animate.speed = 0.2;
+	  animate.color = { bg: 'black', ink: 'green' };
 
-    animate.density = 4550;
-    animate.noise = 164;
-    animate.speed = 5;
-    animate.color = { bg: 'black', ink: 'rgba(0, 0, 0, .5)' };
+		//animate.circles = new Array(Math.floor(Math.random()*6) + 2);
+		animate.circles = new Array(20);
+    animate.canvas.width = window.innerWidth > window.innerHeight ? window.innerHeight : window.innerWidth;
+		animate.canvas.height = animate.canvas.width;
+  	animate.radius = Math.floor(animate.canvas.width / 2 - animate.noise - 2);
 
-    animate.circles = new Array(8); //new Array(Math.floor(Math.random()*6)   2); // 16, 12
-    animate.canvas.width = window.innerWidth > 500 ? 500 : window.innerWidth;
-    animate.canvas.height = animate.canvas.width;
-    animate.radius = Math.floor(animate.canvas.width / 2 - animate.noise - 2);
+		c_left = document.getElementById('animation').offsetLeft;
+		m_left = 0;
+		w_part = Math.floor(animate.canvas.width / 10);
+		if (c_left > w_part) {
+			m_left = c_left - w_part;
+		}
 
-    animate.colors = ["#577590","#F3CA40","#F2A541","#F08A4B","#D78A76"] ;
-    animate.colorsindex = 0;
-
-    c_left = document.getElementById('animation').offsetLeft;
-    m_left = 0;
-    w_part = Math.floor(animate.canvas.width / 10);
-    if (c_left > w_part) {
-      m_left = c_left - w_part;
-    }
-
-    //document.getElementById('animation').style.marginLeft = m_left + "px";
+		//document.getElementById('test').innerText = "margin-left: " + m_left + " | part: " + w_part + " | left: " + document.getElementsByClassName('container')[0].offsetLeft;
+	//	document.getElementById('animation').style.marginLeft = m_left + "px";
 
     animate.Set();
     animate.Draw();
   }
 };
 
-  window.addEventListener('load', function(){animate.Init();});
-  window.addEventListener('resize',function(){animate.Init();},false);
+
+
+window.addEventListener('load', function(){animate.Init();});
+window.addEventListener('resize',function(){animate.Init();},false);
+animate.Init();

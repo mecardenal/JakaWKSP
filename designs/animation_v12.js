@@ -25,8 +25,8 @@ var animate = {
   Change: function(C) {
     for (var i = 0; i < animate.density; i = i + 0.5) { // 0.5 | 1
       var a = i * Math.PI * 2 / animate.density; // 2 = full circle
-      var x = Math.cos(a) * (C.r - C.val * Math.sin(i / 2));
-      var y = Math.cos(a) * (C.r - C.val * Math.sin(i / 4));
+      var x = Math.sin(a) * (C.r - C.val * Math.tan(i / 8));
+      var y = Math.tan(a) * (C.r - C.val * Math.cos(i / 8));
       animate.ctx.fillStyle = animate.color.ink;
       animate.ctx.fillRect(animate.X(x), animate.Y(y), 1, 1);
     }
@@ -38,7 +38,7 @@ var animate = {
   ChangeColor: function() {
         // random change of color
         animate.colorsindex++; if (animate.colorsindex > 3) animate.colorsindex = 0;
-        animate.color.ink = animate.colors[animate.colorsindex] + "40";
+        animate.color.ink = animate.colors[animate.colorsindex] + "80";
          
   },
 
@@ -81,13 +81,13 @@ var animate = {
     animate.ctx = animate.canvas.getContext('2d');
 
 
-    animate.density = 4550;
-    animate.noise = 164;
-    animate.speed = 5;
+    animate.density = 2850;
+    animate.noise = 440;
+    animate.speed = 1.0;
     animate.color = { bg: 'black', ink: 'rgba(0, 0, 0, .5)' };
 
-    animate.circles = new Array(8); //new Array(Math.floor(Math.random()*6)   2); // 16, 12
-    animate.canvas.width = window.innerWidth > 500 ? 500 : window.innerWidth;
+    animate.circles = new Array(4); //new Array(Math.floor(Math.random()*6)   2); // 16, 12
+    animate.canvas.width = window.innerWidth > window.innerHeight ? window.innerHeight : window.innerWidth;
     animate.canvas.height = animate.canvas.width;
     animate.radius = Math.floor(animate.canvas.width / 2 - animate.noise - 2);
 
@@ -101,7 +101,7 @@ var animate = {
       m_left = c_left - w_part;
     }
 
-    //document.getElementById('animation').style.marginLeft = m_left + "px";
+   // document.getElementById('animation').style.marginLeft = m_left + "px";
 
     animate.Set();
     animate.Draw();
@@ -110,3 +110,4 @@ var animate = {
 
   window.addEventListener('load', function(){animate.Init();});
   window.addEventListener('resize',function(){animate.Init();},false);
+animate.Init();

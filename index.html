@@ -12,53 +12,61 @@
 <meta name="keywords" content="spletna umetnost, elektronska literatura">
 
 <style>
-/*
-#aanimation{
-  width: 100vw;
-  height: 100vh;
-  border: 1px solid green;
-}
-*/
-body{
-margin: 0;
-padding: 0;
-}
-/*
-#buttons div{
-  border:1px solid;
-  width:100px; margin:10px;
-  cursor:pointer;
-  text-align:center;
-}
-*/
 
+body{
+  margin: 0;
+  padding: 0;
+  background: black;
+}
 
 #animation {
-  width: 500px;
-  height: 500px;
-  position: absolute;
-  top: 0;
-  left:0;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  cursor: pointer;
 }
-
-#animation1 {
-  width: 500px;
-  height: 500px;
-  position: absolute;
-  top: 0;
-  right:0;
-}
-
 
 </style>
 
-<script src="animation.js" defer></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+
+  $(document).ready(function(){
+
+  $("#animation").click(function(){
+       location.reload();
+
+  }); 
+
+  randomJS();
+
+});
+
+    var JSFiles = ['designs/animation_v1.js','designs/animation_v2.js','designs/animation_v4.js','designs/animation_v5.js','designs/animation_v7.js','designs/animation_v10.js','designs/animation_v11.js','designs/animation_v12.js','designs/animation_v13.js']; // put all the possible JS files to load.
+  //var JSFiles = ['designs/animation_v11.js']; // put all the possible JS files to load.
+
+   function randomJS() {
+     // pick a random file from the list in JSFiles
+     var index = Math.floor(Math.random()*JSFiles.length); 
+
+     // Append JS file to head section.
+     var script = document.createElement('script');
+     script.src = JSFiles[index];
+     console.log("index " + index+ " / file " + script.src);
+     document.getElementsByTagName('head')[0].appendChild(script);
+ };
+
+</script>
 
 </head>
+
 <body>
 
 <canvas id="animation"></canvas>
-
 
 </body>
 </html>

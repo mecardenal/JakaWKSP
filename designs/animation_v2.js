@@ -76,14 +76,14 @@ var animate = {
 		animate.canvas = document.getElementById('animation'); //document.querySelector('canvas');
     animate.ctx = animate.canvas.getContext('2d');
 
-		animate.density = 250;
+		animate.density = 600;
 		animate.noise = 200;
-	  animate.speed = 0.84;
-	  animate.color = { bg: 'rgba(242, 255, 73, 1)', ink: 'rgba(251, 98, 246, .3)' };
+	  animate.speed = 2.14;
+    animate.color = { bg: 'black', ink: '#F9DC5C40' };
 
-		animate.circles = new Array(Math.floor(Math.random()*200));
+		animate.circles = new Array(Math.floor(Math.random() * (150 - 100) + 100));
 		//animate.circles = new Array(1);
-		animate.canvas.width = window.innerWidth > 500 ? 400 : window.innerWidth;
+    animate.canvas.width = window.innerWidth > window.innerHeight ? window.innerHeight : window.innerWidth;
 		animate.canvas.height = animate.canvas.width;
   	animate.radius = Math.floor(animate.canvas.width / 2 - animate.noise - 2);
 
@@ -99,7 +99,6 @@ var animate = {
 
     animate.Set();
     animate.Draw();
-    console.log("HOLI V2");
   }
 };
 

@@ -26,7 +26,8 @@ var animateA = {
   },
 
   ChangeColor: function(){
-    this.color = animateA.color.ink[Math.floor(Math.random()*animateA.color.ink.length)] + "40";
+//    console.log("E " + );
+    this.color = animateA.color.ink[Math.floor(Math.random()*colors_array[0].length)] + "40";
 
   },
 
@@ -40,7 +41,7 @@ var animateA = {
       animateA.ctx.fillRect(animateA.X(x), animateA.Y(y), 2, 2);
     }
 
-    ChangeColor();
+    animateA.ChangeColor();
 
     animateA.Check(C);
   },

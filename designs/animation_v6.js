@@ -10,10 +10,15 @@ var animate = {
 
   Circle: function(i) {
     this.r = animate.radius - i * animate.radius / animate.circles.length;
-    this.e = i % 4 ? true : false;
+    this.e = i % 2 ? true : false;
     this.max = Math.random() * animate.noise;
     this.min = -Math.random() * animate.noise;
     this.val = Math.random() * (this.max - this.min) + this.min;
+
+    //Random color:
+    //this.color = "#" + Math.floor(Math.random()*16777215).toString(16) + "19";
+    this.color = animate.color.ink[Math.floor(Math.random()*animate.color.ink.length)] + "50";
+
   },
 
   Clear: function() {
@@ -23,12 +28,12 @@ var animate = {
 
   // changing of shape
   Change: function(C) {
-    for (var i = 0; i < animate.density; i = i + 0.8) { // 0.5 | 1
+    for (var i = 0; i < animate.density; i = i + 0.5) { // 0.5 | 1
       var a = i * Math.PI * 2 / animate.density; // 2 = full circle
-      var x = Math.cos(a) * (C.r - C.val * Math.cos(i / 2));
-      var y = Math.sin(a) * (C.r - C.val * Math.cos(i / 6));
-      animate.ctx.fillStyle = animate.color.ink;
-      animate.ctx.fillRect(animate.X(x), animate.Y(y), 1, 1);
+      var x = Math.cos(a) * (C.r - C.val * Math.tan(i / 4));
+      var y = Math.tan(a) * (C.r - C.val * Math.sin(i / 2));
+      animate.ctx.fillStyle = C.color;
+      animate.ctx.fillRect(animate.X(x), animate.Y(y), 3, 3);
     }
     animate.Check(C);
   },
@@ -76,20 +81,20 @@ var animate = {
 		animate.canvas = document.getElementById('animation'); //document.querySelector('canvas');
     animate.ctx = animate.canvas.getContext('2d');
 
-		animate.density = 250;
-		animate.noise = 200;
-	  animate.speed = 0.84;
-	  animate.color = { bg: 'rgba(242, 255, 73, 1)', ink: 'rgba(251, 98, 246, .3)' };
+    animate.density = 3050;
+    animate.noise = 534.9;
+    animate.speed = 1.5;
+	  animate.color = { bg: 'black', ink: Array("#577590","#F3CA40","#F2A541","#F08A4B","#D78A76") };
 
-		animate.circles = new Array(Math.floor(Math.random()*200));
-		//animate.circles = new Array(1);
-		animate.canvas.width = window.innerWidth > 500 ? 400 : window.innerWidth;
+		//animate.circles = new Array(Math.floor(Math.random()*6) + 2);
+		animate.circles = new Array(10);
+    animate.canvas.width = window.innerWidth > window.innerHeight ? window.innerHeight : window.innerWidth;
 		animate.canvas.height = animate.canvas.width;
   	animate.radius = Math.floor(animate.canvas.width / 2 - animate.noise - 2);
 
-		c_left = document.getElementsByClassName('animation').offsetLeft;
+		c_left = document.getElementById('animation').offsetLeft;
 		m_left = 0;
-		w_part = Math.floor(animate.canvas.width / 2);
+		w_part = Math.floor(animate.canvas.width / 10);
 		if (c_left > w_part) {
 			m_left = c_left - w_part;
 		}
@@ -99,7 +104,6 @@ var animate = {
 
     animate.Set();
     animate.Draw();
-    console.log("HOLI V2");
   }
 };
 
